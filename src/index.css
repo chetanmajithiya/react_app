@@ -11,3 +11,70 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.fade-appear,
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+.fade-appear-active,
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0;
+}
+
+.ChartDiv{
+  width: 500px;
+  background-color: white;
+  border-radius: 3px;
+}
+
+.ChartDiv:after,.ChartDiv:before {
+  content:'';
+  clear: both;
+}
+.ChartDivBar{
+  width: 600px;
+}
+.DealForm{
+  padding: 10px;
+}
+.TabHeadValue{
+  padding: 10px;
+  box-shadow: 1px 1px 4px silver;
+  margin: 5px;
+}
+.DealDrawer{
+  width: 550px;
+}
+.DealPriceText{
+  margin-left: 20px !important;
+}
+@media (max-width: 600px) {
+  .DealDrawer{
+    width: 100%;
+  }
+}
+
+@media (max-width: 470px) {
+  .DealPriceText{
+    margin-left: 0px !important;
+    margin-top: 20px !important;
+  }
+}
+@media (max-width: 900px) {
+  .ChartDiv{
+    width: 400px;
+  }
+  .ChartDivBar{
+    width: 400px;
+  }
+}

@@ -1,26 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import ResponsiveDrawer from './components/admin/admin'
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
+import fire from './config/fire'
+/*import Error from './components/error'*/
+import Login from './components/login'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component{
+    constructor() {
+        super();
+        this.state = ({
+            user: null,
+        });
+        this.authListener = this.authListener.bind(this);
+    }
+
+    componentDidMount() {
+        this.authListener();
+    }
+    authListener() {
+        fire.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.setState({ user });
+                localStorage.setItem('user', user.uid);
+            } else {
+                this.setState({ user: null });
+                localStorage.removeItem('user');
+            }
+        });
+    }
+    render() {
+        return (
+            <Router>
+                <Switch>
+                    {this.state.user ? (<ResponsiveDrawer/>) : (<Login/>)}
+                </Switch>
+            </Router>
+        );
+    }
 }
 
 export default App;
